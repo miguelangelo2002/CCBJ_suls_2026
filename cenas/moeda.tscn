@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://bygcfgq76wxrf"]
+
+[ext_resource type="Script" uid="uid://dnb6168exknvq" path="res://gd/moeda.gd" id="1_jvmwt"]
+[ext_resource type="Texture2D" uid="uid://cmh14qyik38ho" path="res://desenhos/moeda_ouro_1.png" id="2_hmjto"]
+[ext_resource type="Texture2D" uid="uid://i51sh6p5mja0" path="res://desenhos/moeda_ouro_2.png" id="3_x5it7"]
+[ext_resource type="Texture2D" uid="uid://bhjandbsqc3en" path="res://desenhos/moeda_ouro_3.png" id="4_i7vr2"]
+[ext_resource type="Texture2D" uid="uid://dx18hudlnm54p" path="res://desenhos/moeda_ouro_4.png" id="5_8kj0f"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jvmwt"]
+radius = 0.53328866
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bce4n"]
+
+[sub_resource type="Resource" id="Resource_mmw6t"]
+metadata/__load_path__ = "res://aula jose carlos/moeda_ouro_1.png"
+
+[sub_resource type="Animation" id="Animation_n85yn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Resource_mmw6t")]
+}
+
+[sub_resource type="Animation" id="Animation_s81j4"]
+resource_name = "girando"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_hmjto"), ExtResource("3_x5it7"), ExtResource("4_i7vr2"), ExtResource("5_8kj0f")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cat2i"]
+_data = {
+&"RESET": SubResource("Animation_n85yn"),
+&"girando": SubResource("Animation_s81j4")
+}
+
+[node name="moeda" type="RigidBody3D"]
+transform = Transform3D(0.8114264, 0, 0, 0, 0.65277517, 0, 0, 0, 0.7134197, 0, 0, 0)
+script = ExtResource("1_jvmwt")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.2895465, 0, 0, 0, 1.4527476, 0, 0, 0, 4.4461436, 0, 0, 0)
+pixel_size = 0.1
+texture_filter = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.2638942, 0, 0, 0, 2.126753, 0, 0, 0, 1.5719855, 0, 0, 0)
+shape = SubResource("SphereShape3D_jvmwt")
+debug_color = Color(0.9012094, 0.0001647997, 0.76187575, 0.41960785)
+
+[node name="moeda_area" type="Area3D" parent="."]
+transform = Transform3D(0.99999994, 0, 0, 0, 1.8523256, 0, 0, 0, 1.2841601, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="moeda_area"]
+transform = Transform3D(2.445611, 0, 0, 0, 1.249696, 0, 0, 0, 1.5009171, 0, 0, 0)
+shape = SubResource("SphereShape3D_bce4n")
+debug_color = Color(0.3453869, 0.5983999, 0.37003884, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cat2i")
+}
+autoplay = "girando"

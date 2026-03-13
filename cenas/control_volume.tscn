@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://rioub0jxvnby"]
+
+[ext_resource type="Script" uid="uid://bk4njmkdgrhtv" path="res://gd/h_slider_music.gd" id="1_x4tw6"]
+
+[node name="Control_volume" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="HSliderMusic" type="HSlider" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 199.0
+script = ExtResource("1_x4tw6")
+
+[node name="Label" type="Label" parent="HSliderMusic"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 36.0
+offset_right = 575.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 30
+text = "Music Sound:"
+
+[node name="HSliderSFX" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 322.0
+offset_right = 1156.0
+offset_bottom = 521.0
+script = ExtResource("1_x4tw6")
+
+[node name="Label" type="Label" parent="HSliderSFX"]
+layout_mode = 0
+offset_left = 485.0
+offset_top = -3.0
+offset_right = 678.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 30
+text = "Effect sound:"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HSliderSFX"]

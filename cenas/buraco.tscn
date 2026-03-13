@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7ek1qcetwrly"]
+
+[ext_resource type="Script" uid="uid://icwjh5gug2hd" path="res://buraco.gd" id="1_ci7s5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ci7s5"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_plnhl"]
+material = SubResource("StandardMaterial3D_ci7s5")
+size = Vector3(6.67, 0.195, 6.78)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5ildn"]
+size = Vector3(6.67, 0.195, 6.78)
+
+[node name="buraco" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_plnhl")
+
+[node name="Area3D" type="Area3D" parent="MeshInstance3D"]
+script = ExtResource("1_ci7s5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/Area3D"]
+shape = SubResource("BoxShape3D_5ildn")
+
+[connection signal="body_entered" from="MeshInstance3D/Area3D" to="MeshInstance3D/Area3D" method="_on_body_entered"]
